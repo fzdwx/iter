@@ -1,18 +1,3 @@
-# Iter
-
-A experimental iterator library for Golang.
-
-## Installation
-
-```bash
-go get github.com/fzdwx/iter
-```
-
-## Usage
-
-playground: https://go.dev/play/p/5HkLWOLM-fv
-
-```go
 package main
 
 import (
@@ -34,4 +19,3 @@ func main() {
 
 	a.ForEach(fx.Println[int])
 }
-```
