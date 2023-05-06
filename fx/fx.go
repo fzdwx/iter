@@ -6,6 +6,8 @@ type Predicate[T any] func(T) bool
 
 type Func[T, U any] func(T) U
 
+type BiFunc[T, U, V any] func(T, U) V
+
 type Consumer[T any] func(T)
 
 func Identity[T any](t T) T {
