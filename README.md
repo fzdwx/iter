@@ -10,6 +10,8 @@ go get github.com/fzdwx/iter
 
 ## Usage
 
+playground: https://go.dev/play/p/-8fD0vvzZds
+
 ```go
 package array
 
