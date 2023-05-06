@@ -44,3 +44,72 @@ func TestForEach(t *testing.T) {
 		idx++
 	})
 }
+
+func TestGroupBy(t *testing.T) {
+	type user struct {
+		name string
+		age  int
+	}
+
+	users := []user{
+		{"a", 1},
+		{"b", 2},
+		{"c", 3},
+		{"d", 4},
+		{"e", 5},
+		{"Jake", 5},
+		{"Alice", 1},
+		{"Bob", 2},
+		{"a", 3},
+	}
+	arr := New(users)
+
+	m1 := Map(arr.Iter(), func(u user) user {
+		return u
+	}).GroupByStr(func(u user) string {
+		return u.name
+	})
+
+	assert.Equal(t, 8, len(m1))
+	assert.Equal(t, m1["a"], []user{{"a", 1}, {"a", 3}})
+	assert.Equal(t, m1["b"], []user{{"b", 2}})
+
+	m2 := Map(New(users).Iter(), func(u user) user {
+		return u
+	}).GroupByInt(func(u user) int {
+		return u.age
+	})
+
+	assert.Equal(t, 5, len(m2))
+	assert.Equal(t, m2[1], []user{{"a", 1}, {"Alice", 1}})
+}
+
+func TestGroupBy2(t *testing.T) {
+	type user struct {
+		name string
+		age  int
+	}
+
+	users := []user{
+		{"a", 1},
+		{"b", 2},
+		{"c", 3},
+		{"d", 4},
+		{"e", 5},
+		{"Jake", 5},
+		{"Alice", 1},
+		{"Bob", 2},
+		{"a", 3},
+	}
+	m3 := Map(New(users).Iter(), func(u user) string {
+		return u.name
+	}).Iterator()
+
+	g := GroupBy(m3, func(u string) string {
+		return u
+	})
+
+	assert.Equal(t, 8, len(g))
+	assert.Equal(t, g["a"], []string{"a", "a"})
+	assert.Equal(t, g["b"], []string{"b"})
+}

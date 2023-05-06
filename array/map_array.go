@@ -8,13 +8,16 @@ import (
 type mapArray[T, U any] struct {
 	iter   types.Iterator[T]
 	mapper fx.Func[T, U]
+	groupWrapper[U]
 }
 
 func Map[T, U any](iter types.Iterator[T], mapper fx.Func[T, U]) *mapArray[T, U] {
-	return &mapArray[T, U]{
+	m := &mapArray[T, U]{
 		iter:   iter,
 		mapper: mapper,
 	}
+	m.groupWrapper = groupWrapper[U]{m}
+	return m
 }
 
 func (m *mapArray[T, U]) Next() (U, bool) {
@@ -23,6 +26,10 @@ func (m *mapArray[T, U]) Next() (U, bool) {
 		return types.Empty[U](), false
 	}
 	return m.mapper(v), true
+}
+
+func (m *mapArray[T, U]) Iterator() types.Iterator[U] {
+	return m
 }
 
 func (m *mapArray[T, U]) Filter(filter fx.Predicate[U]) *filterArray[U] {
@@ -34,5 +41,5 @@ func (m *mapArray[T, U]) ForEach(consumer fx.Consumer[U]) {
 }
 
 func (m *mapArray[T, U]) ToArray() []U {
-	return collectToArray[U](m)
+	return CollectToArray[U](m)
 }

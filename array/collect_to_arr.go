@@ -2,7 +2,7 @@ package array
 
 import "github.com/fzdwx/iter/types"
 
-func collectToArray[T any](iter types.Iterator[T]) []T {
+func CollectToArray[T any](iter types.Iterator[T]) []T {
 	var arr []T
 	for {
 		v, ok := iter.Next()

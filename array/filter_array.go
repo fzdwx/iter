@@ -8,13 +8,16 @@ import (
 type filterArray[T any] struct {
 	iter   types.Iterator[T]
 	filter fx.Predicate[T]
+	groupWrapper[T]
 }
 
 func Filter[T any](iter types.Iterator[T], filter fx.Predicate[T]) *filterArray[T] {
-	return &filterArray[T]{
+	f := &filterArray[T]{
 		iter:   iter,
 		filter: filter,
 	}
+	f.groupWrapper = groupWrapper[T]{f}
+	return f
 }
 
 func (f *filterArray[T]) Next() (T, bool) {
@@ -38,5 +41,5 @@ func (f *filterArray[T]) ForEach(consumer fx.Consumer[T]) {
 }
 
 func (f *filterArray[T]) ToArray() []T {
-	return collectToArray[T](f)
+	return CollectToArray[T](f)
 }

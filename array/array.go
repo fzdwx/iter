@@ -8,10 +8,13 @@ import (
 type Array[T any] struct {
 	arr []T
 	idx int
+	groupWrapper[T]
 }
 
 func New[T any](arr []T) *Array[T] {
-	return &Array[T]{arr: arr, idx: -1}
+	a := &Array[T]{arr: arr, idx: -1}
+	a.groupWrapper = groupWrapper[T]{a}
+	return a
 }
 
 func (a *Array[T]) Iter() types.Iterator[T] {
