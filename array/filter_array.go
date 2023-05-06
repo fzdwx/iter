@@ -38,5 +38,5 @@ func (f *filterArray[T]) ForEach(consumer fx.Consumer[T]) {
 }
 
 func (f *filterArray[T]) ToArray() []T {
-	return newCollectToArray[T](f).Collect()
+	return collectToArray[T](f)
 }

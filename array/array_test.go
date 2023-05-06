@@ -7,8 +7,8 @@ import (
 )
 
 func Test_Arr(t *testing.T) {
-	arr := New([]int{1, 2, 3, 4, 5})
-	m := Map[int, string](arr.Iter(), func(v int) string {
+	arr := Iter([]int{1, 2, 3, 4, 5})
+	m := Map[int, string](arr, func(v int) string {
 		return "hello" + fmt.Sprintf("%d", v)
 	}).Filter(func(v string) bool {
 		return v == "hello1" || v == "hello5"

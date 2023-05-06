@@ -34,5 +34,5 @@ func (m *mapArray[T, U]) ForEach(consumer fx.Consumer[U]) {
 }
 
 func (m *mapArray[T, U]) ToArray() []U {
-	return newCollectToArray[U](m).Collect()
+	return collectToArray[U](m)
 }
