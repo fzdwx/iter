@@ -29,6 +29,10 @@ func (m *mapArray[T, U]) Filter(filter fx.Predicate[U]) *filterArray[U] {
 	return Filter[U](m, filter)
 }
 
+func (m *mapArray[T, U]) ForEach(consumer fx.Consumer[U]) {
+	ForEach[U](m, consumer)
+}
+
 func (m *mapArray[T, U]) ToArray() []U {
 	return newCollectToArray[U](m).Collect()
 }

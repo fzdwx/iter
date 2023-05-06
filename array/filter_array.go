@@ -33,6 +33,10 @@ func (f *filterArray[T]) Filter(filter fx.Predicate[T]) *filterArray[T] {
 	return Filter[T](f, filter)
 }
 
+func (f *filterArray[T]) ForEach(consumer fx.Consumer[T]) {
+	ForEach[T](f, consumer)
+}
+
 func (f *filterArray[T]) ToArray() []T {
 	return newCollectToArray[T](f).Collect()
 }

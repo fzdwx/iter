@@ -1,15 +1,9 @@
 package iter
 
 import (
-	"github.com/fzdwx/iter/types"
+	"github.com/fzdwx/iter/array"
 )
 
-func ForEach[T any](iter types.Iterator[T], fn func(T)) {
-	for {
-		v, ok := iter.Next()
-		if !ok {
-			break
-		}
-		fn(v)
-	}
+func NewArray[T any](arr []T) *array.Array[T] {
+	return array.New[T](arr)
 }
