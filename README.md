@@ -35,3 +35,16 @@ func main() {
 	a.ForEach(fx.Println[int])
 }
 ```
+
+### Array
+
+ops:
+
+- `Distinct` https://github.com/fzdwx/iter/blob/main/array/ops_distinct.go#L8
+- `Map` https://github.com/fzdwx/iter/blob/main/array/ops_map.go#L8
+- `Filter` https://github.com/fzdwx/iter/blob/main/array/ops_filter.go#L8
+
+collect:
+
+- ToArray https://github.com/fzdwx/iter/blob/main/array/term_collect_to_arr.go#L6
+- GroupBy https://github.com/fzdwx/iter/blob/main/array/term_groupby.go#L9

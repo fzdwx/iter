@@ -27,7 +27,3 @@ func (m *mapArray[T, U]) Next() (U, bool) {
 	}
 	return m.mapper(v), true
 }
-
-func (m *mapArray[T, U]) ToArray() []U {
-	return CollectToArray[U](m)
-}

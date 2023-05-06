@@ -29,17 +29,19 @@ func TestMap(t *testing.T) {
 }
 
 func TestForEach(t *testing.T) {
-	arr := New([]int{1, 2, 3, 4, 5})
+	ints := []int{1, 2, 3, 4, 5}
+	arr := New(ints)
 	idx := 0
 	arr.ForEach(func(v int) {
 		assert.Equal(t, v, idx+1)
 		idx++
 	})
 
-	idx = 0
-	Map(arr.Iter(), func(v int) string {
+	idx = 1
+	Map(New(ints).Iter(), func(v int) string {
 		return "hello" + fmt.Sprintf("%d", v)
 	}).ForEach(func(v string) {
+		println(v)
 		assert.Equal(t, v, "hello"+fmt.Sprintf("%d", idx))
 		idx++
 	})
