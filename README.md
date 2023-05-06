@@ -24,16 +24,21 @@ func main() {
 	ints := []int{1, 1, 2, 2, 3, 6, 7, 8, 9, 10}
 
 	a := iter.Array(ints).
+		// convert to another type: `distinctArray`
 		DistinctInt(fx.IdentityInt).
+		// convert to another type: `filterArray`
 		Filter(func(i int) bool {
 			return i > 2
 		}).
+		// convert to another type: `mapArray`
 		MapToInt(func(i int) int {
 			return i * 2
 		})
 
+	// call `Next` to get next element
 	a.ForEach(fx.Println[int])
 }
+
 ```
 
 ### Array
