@@ -5,12 +5,14 @@ import (
 	"github.com/fzdwx/iter/types"
 )
 
-func Distinct[T any, K comparable](iter types.Iterator[T], distinct fx.Func[T, K]) *distinctArray[T, K] {
-	return &distinctArray[T, K]{
+func Distinct[T any, K comparable](iter types.Iterator[T], keyBy fx.Func[T, K]) *distinctArray[T, K] {
+	d := &distinctArray[T, K]{
 		iter:     iter,
 		m:        make(map[K]bool),
-		distinct: distinct,
+		distinct: keyBy,
 	}
+	d.commonArrayOps = newCommonArrayOps[T](d)
+	return d
 }
 
 type distinctArray[T any, K comparable] struct {

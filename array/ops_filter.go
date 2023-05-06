@@ -31,7 +31,3 @@ func (f *filterArray[T]) Next() (T, bool) {
 		}
 	}
 }
-
-func (f *filterArray[T]) ToArray() []T {
-	return CollectToArray[T](f)
-}

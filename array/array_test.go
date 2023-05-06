@@ -66,7 +66,7 @@ func TestGroupBy(t *testing.T) {
 
 	m1 := Map(arr.Iter(), func(u user) user {
 		return u
-	}).GroupByStr(func(u user) string {
+	}).GroupBy(func(u user) string {
 		return u.name
 	})
 
