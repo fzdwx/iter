@@ -8,12 +8,12 @@ import (
 type Array[T any] struct {
 	arr []T
 	idx int
-	groupWrapper[T]
+	commonArrayOps[T]
 }
 
 func New[T any](arr []T) *Array[T] {
 	a := &Array[T]{arr: arr, idx: -1}
-	a.groupWrapper = groupWrapper[T]{a}
+	a.commonArrayOps = newCommonArrayOps[T](a)
 	return a
 }
 

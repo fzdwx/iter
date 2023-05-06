@@ -8,7 +8,7 @@ import (
 type filterArray[T any] struct {
 	iter   types.Iterator[T]
 	filter fx.Predicate[T]
-	groupWrapper[T]
+	commonArrayOps[T]
 }
 
 func Filter[T any](iter types.Iterator[T], filter fx.Predicate[T]) *filterArray[T] {
@@ -16,7 +16,7 @@ func Filter[T any](iter types.Iterator[T], filter fx.Predicate[T]) *filterArray[
 		iter:   iter,
 		filter: filter,
 	}
-	f.groupWrapper = groupWrapper[T]{f}
+	f.commonArrayOps = newCommonArrayOps[T](f)
 	return f
 }
 

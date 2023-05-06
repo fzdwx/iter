@@ -8,7 +8,7 @@ import (
 type mapArray[T, U any] struct {
 	iter   types.Iterator[T]
 	mapper fx.Func[T, U]
-	groupWrapper[U]
+	commonArrayOps[U]
 }
 
 func Map[T, U any](iter types.Iterator[T], mapper fx.Func[T, U]) *mapArray[T, U] {
@@ -16,7 +16,7 @@ func Map[T, U any](iter types.Iterator[T], mapper fx.Func[T, U]) *mapArray[T, U]
 		iter:   iter,
 		mapper: mapper,
 	}
-	m.groupWrapper = groupWrapper[U]{m}
+	m.commonArrayOps = newCommonArrayOps[U](m)
 	return m
 }
 
