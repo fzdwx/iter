@@ -103,7 +103,7 @@ func TestGroupBy2(t *testing.T) {
 	}
 	m3 := Map(New(users).Iter(), func(u user) string {
 		return u.name
-	}).Iterator()
+	}).Iter()
 
 	g := GroupBy(m3, func(u string) string {
 		return u

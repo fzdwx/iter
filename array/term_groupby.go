@@ -5,6 +5,7 @@ import (
 	"github.com/fzdwx/iter/types"
 )
 
+// GroupBy groups the elements of the iterator by the given key.
 func GroupBy[T any, K comparable](iter types.Iterator[T], groupBy fx.Func[T, K]) map[K][]T {
 	return (&groupArray[T, K]{iter: iter, groupBy: groupBy}).Collect()
 }

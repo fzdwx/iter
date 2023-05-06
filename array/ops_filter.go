@@ -5,12 +5,6 @@ import (
 	"github.com/fzdwx/iter/types"
 )
 
-type filterArray[T any] struct {
-	iter   types.Iterator[T]
-	filter fx.Predicate[T]
-	commonArrayOps[T]
-}
-
 func Filter[T any](iter types.Iterator[T], filter fx.Predicate[T]) *filterArray[T] {
 	f := &filterArray[T]{
 		iter:   iter,
@@ -18,6 +12,12 @@ func Filter[T any](iter types.Iterator[T], filter fx.Predicate[T]) *filterArray[
 	}
 	f.commonArrayOps = newCommonArrayOps[T](f)
 	return f
+}
+
+type filterArray[T any] struct {
+	iter   types.Iterator[T]
+	filter fx.Predicate[T]
+	commonArrayOps[T]
 }
 
 func (f *filterArray[T]) Next() (T, bool) {
@@ -30,14 +30,6 @@ func (f *filterArray[T]) Next() (T, bool) {
 			return v, true
 		}
 	}
-}
-
-func (f *filterArray[T]) Filter(filter fx.Predicate[T]) *filterArray[T] {
-	return Filter[T](f, filter)
-}
-
-func (f *filterArray[T]) ForEach(consumer fx.Consumer[T]) {
-	ForEach[T](f, consumer)
 }
 
 func (f *filterArray[T]) ToArray() []T {
