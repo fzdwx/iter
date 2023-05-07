@@ -8,6 +8,8 @@ type Func[T, U any] func(T) U
 
 type BiFunc[T, U, V any] func(T, U) V
 
+type BinaryOperator[T any] BiFunc[T, T, T]
+
 type Consumer[T any] func(T)
 
 func Identity[T any](t T) T {

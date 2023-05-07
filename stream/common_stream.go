@@ -9,7 +9,7 @@ type commonStreamOps[T any] struct {
 	iter types.Iterator[T]
 }
 
-func (a *commonStreamOps[T]) Filter(filter fx.Predicate[T]) *filterArray[T] {
+func (a *commonStreamOps[T]) Filter(filter fx.Predicate[T]) *filterStream[T] {
 	return Filter[T](a.iter, filter)
 }
 

@@ -8,8 +8,8 @@ import (
 func Distinct[T any, K comparable](
 	iter types.Iterator[T],
 	keyBy fx.Func[T, K],
-) *distinctArray[T, K] {
-	d := &distinctArray[T, K]{
+) *distinctStream[T, K] {
+	d := &distinctStream[T, K]{
 		iter:     iter,
 		m:        make(map[K]bool),
 		distinct: keyBy,
@@ -18,14 +18,14 @@ func Distinct[T any, K comparable](
 	return d
 }
 
-type distinctArray[T any, K comparable] struct {
+type distinctStream[T any, K comparable] struct {
 	iter     types.Iterator[T]
 	m        map[K]bool
 	distinct fx.Func[T, K]
 	commonStreamOps[T]
 }
 
-func (d distinctArray[T, K]) Next() (T, bool) {
+func (d distinctStream[T, K]) Next() (T, bool) {
 	for {
 		v, ok := d.iter.Next()
 		if !ok {
