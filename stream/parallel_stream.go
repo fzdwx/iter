@@ -31,6 +31,9 @@ func OfParallel[T any](arr []T) *ParallelStream[T] {
 }
 
 func OfParallelWithWorkers[T any](arr []T, workers int) *ParallelStream[T] {
+	if workers < minWorkers {
+		workers = minWorkers
+	}
 	a := &ParallelStream[T]{arr: arr, workers: workers}
 
 	return a
