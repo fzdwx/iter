@@ -16,27 +16,38 @@ playground: https://go.dev/play/p/5HkLWOLM-fv
 package main
 
 import (
+	"fmt"
 	"github.com/fzdwx/iter"
 	"github.com/fzdwx/iter/fx"
+	"github.com/fzdwx/iter/stream"
 )
 
 func main() {
 	ints := []int{1, 1, 2, 2, 3, 6, 7, 8, 9, 10}
 
-	a := iter.Array(ints).
-		// convert to another type: `distinctArray`
+	a := iter.Stream(ints).
 		DistinctInt(fx.IdentityInt).
-		// convert to another type: `filterArray`
 		Filter(func(i int) bool {
 			return i > 2
 		}).
-		// convert to another type: `mapArray`
 		MapToInt(func(i int) int {
 			return i * 2
 		})
 
-	// call `Next` to get next element
 	a.ForEach(fx.Println[int])
+
+	m1 := stream.ToMap[int, string](iter.Stream(ints), func(i int) string {
+		return fmt.Sprintf("%d", i)
+	})
+
+	m2 := stream.ToMapWithValue[int, string, string](iter.Stream(ints), func(i int) string {
+		return fmt.Sprintf("%d", i)
+	}, func(i int) string {
+		return fmt.Sprintf("%d", i*2)
+	})
+
+	fmt.Println(m1)
+	fmt.Println(m2)
 }
 
 ```
