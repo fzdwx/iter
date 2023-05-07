@@ -1,4 +1,4 @@
-package array
+package stream
 
 import (
 	"github.com/fzdwx/iter/fx"

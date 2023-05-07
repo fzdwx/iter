@@ -1,11 +1,14 @@
-package array
+package stream
 
 import (
 	"github.com/fzdwx/iter/fx"
 	"github.com/fzdwx/iter/types"
 )
 
-func ToMap[T any, K comparable](iterator types.Iterator[T], keyMapper fx.Func[T, K]) map[K]T {
+func ToMap[T any, K comparable](
+	iterator types.Iterator[T],
+	keyMapper fx.Func[T, K],
+) map[K]T {
 	m := make(map[K]T)
 	for {
 		v, ok := iterator.Next()

@@ -1,17 +1,20 @@
-package array
+package stream
 
 import (
 	"github.com/fzdwx/iter/fx"
 	"github.com/fzdwx/iter/types"
 )
 
-func Distinct[T any, K comparable](iter types.Iterator[T], keyBy fx.Func[T, K]) *distinctArray[T, K] {
+func Distinct[T any, K comparable](
+	iter types.Iterator[T],
+	keyBy fx.Func[T, K],
+) *distinctArray[T, K] {
 	d := &distinctArray[T, K]{
 		iter:     iter,
 		m:        make(map[K]bool),
 		distinct: keyBy,
 	}
-	d.commonArrayOps = newCommonArrayOps[T](d)
+	d.commonStreamOps = newCommonArrayOps[T](d)
 	return d
 }
 
@@ -19,7 +22,7 @@ type distinctArray[T any, K comparable] struct {
 	iter     types.Iterator[T]
 	m        map[K]bool
 	distinct fx.Func[T, K]
-	commonArrayOps[T]
+	commonStreamOps[T]
 }
 
 func (d distinctArray[T, K]) Next() (T, bool) {

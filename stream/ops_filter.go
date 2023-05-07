@@ -1,4 +1,4 @@
-package array
+package stream
 
 import (
 	"github.com/fzdwx/iter/fx"
@@ -10,14 +10,14 @@ func Filter[T any](iter types.Iterator[T], filter fx.Predicate[T]) *filterArray[
 		iter:   iter,
 		filter: filter,
 	}
-	f.commonArrayOps = newCommonArrayOps[T](f)
+	f.commonStreamOps = newCommonArrayOps[T](f)
 	return f
 }
 
 type filterArray[T any] struct {
 	iter   types.Iterator[T]
 	filter fx.Predicate[T]
-	commonArrayOps[T]
+	commonStreamOps[T]
 }
 
 func (f *filterArray[T]) Next() (T, bool) {

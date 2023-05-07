@@ -1,9 +1,9 @@
 package iter
 
 import (
-	"github.com/fzdwx/iter/array"
+	"github.com/fzdwx/iter/stream"
 )
 
-func Array[T any](arr []T) *array.Array[T] {
-	return array.New[T](arr)
+func Stream[T any](arr []T) *stream.Stream[T] {
+	return stream.Of[T](arr)
 }

@@ -1,4 +1,4 @@
-package array
+package stream
 
 import (
 	"fmt"
@@ -20,7 +20,7 @@ func Test_Arr(t *testing.T) {
 }
 
 func TestMap(t *testing.T) {
-	arr := New([]int{1, 2, 3, 4, 5})
+	arr := Of([]int{1, 2, 3, 4, 5})
 	m := Map[int, string](arr.Iter(), func(v int) string {
 		return "hello" + fmt.Sprintf("%d", v)
 	}).ToArray()
@@ -30,7 +30,7 @@ func TestMap(t *testing.T) {
 
 func TestForEach(t *testing.T) {
 	ints := []int{1, 2, 3, 4, 5}
-	arr := New(ints)
+	arr := Of(ints)
 	idx := 0
 	arr.ForEach(func(v int) {
 		assert.Equal(t, v, idx+1)
@@ -38,7 +38,7 @@ func TestForEach(t *testing.T) {
 	})
 
 	idx = 1
-	Map(New(ints).Iter(), func(v int) string {
+	Map(Of(ints).Iter(), func(v int) string {
 		return "hello" + fmt.Sprintf("%d", v)
 	}).ForEach(func(v string) {
 		println(v)
@@ -64,7 +64,7 @@ func TestGroupBy(t *testing.T) {
 		{"Bob", 2},
 		{"a", 3},
 	}
-	arr := New(users)
+	arr := Of(users)
 
 	m1 := Map(arr.Iter(), func(u user) user {
 		return u
@@ -76,7 +76,7 @@ func TestGroupBy(t *testing.T) {
 	assert.Equal(t, m1["a"], []user{{"a", 1}, {"a", 3}})
 	assert.Equal(t, m1["b"], []user{{"b", 2}})
 
-	m2 := Map(New(users).Iter(), func(u user) user {
+	m2 := Map(Of(users).Iter(), func(u user) user {
 		return u
 	}).GroupByInt(func(u user) int {
 		return u.age
@@ -103,7 +103,7 @@ func TestGroupBy2(t *testing.T) {
 		{"Bob", 2},
 		{"a", 3},
 	}
-	m3 := Map(New(users).Iter(), func(u user) string {
+	m3 := Map(Of(users).Iter(), func(u user) string {
 		return u.name
 	}).Iter()
 

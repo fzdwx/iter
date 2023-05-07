@@ -1,4 +1,4 @@
-package array
+package stream
 
 import (
 	"github.com/fzdwx/iter/fx"
@@ -10,14 +10,14 @@ func Map[T, U any](iter types.Iterator[T], mapper fx.Func[T, U]) *mapArray[T, U]
 		iter:   iter,
 		mapper: mapper,
 	}
-	m.commonArrayOps = newCommonArrayOps[U](m)
+	m.commonStreamOps = newCommonArrayOps[U](m)
 	return m
 }
 
 type mapArray[T, U any] struct {
 	iter   types.Iterator[T]
 	mapper fx.Func[T, U]
-	commonArrayOps[U]
+	commonStreamOps[U]
 }
 
 func (m *mapArray[T, U]) Next() (U, bool) {

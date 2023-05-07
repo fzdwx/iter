@@ -1,4 +1,4 @@
-package array
+package stream
 
 import (
 	"github.com/fzdwx/iter/fx"
@@ -8,7 +8,7 @@ import (
 
 func TestDistinct(t *testing.T) {
 	ints := []int{1, 1, 2, 2, 3}
-	arr := New(ints).DistinctInt(fx.IdentityInt).ToArray()
+	arr := Of(ints).DistinctInt(fx.IdentityInt).ToArray()
 	assert.Equal(t, []int{1, 2, 3}, arr)
 }
 
@@ -30,7 +30,7 @@ func TestDistinctBy(t *testing.T) {
 		{"a", 3},
 	}
 
-	arr := New(users).Distinct(func(u user) string {
+	arr := Of(users).Distinct(func(u user) string {
 		return u.name
 	}).ToArray()
 

@@ -1,8 +1,8 @@
-package array
+package stream
 
 import "github.com/fzdwx/iter/types"
 
-// CollectToArray collects all elements from the iterator into an array.
+// CollectToArray collects all elements from the iterator into an stream.
 func CollectToArray[T any](iter types.Iterator[T]) []T {
 	var arr []T
 	for {
