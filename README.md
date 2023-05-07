@@ -10,7 +10,7 @@ go get github.com/fzdwx/iter
 
 ## Usage
 
-playground: https://go.dev/play/p/5HkLWOLM-fv
+playground: https://go.dev/play/p/8YyNuaK95UH
 
 ```go
 package main
@@ -56,13 +56,13 @@ func main() {
 
 ops:
 
-- `Distinct` https://github.com/fzdwx/iter/blob/main/array/ops_distinct.go#L8
-- `Map` https://github.com/fzdwx/iter/blob/main/array/ops_map.go#L8
-- `Filter` https://github.com/fzdwx/iter/blob/main/array/ops_filter.go#L8
+- `Distinct` https://github.com/fzdwx/iter/blob/main/stream/ops_distinct.go#L8
+- `Map` https://github.com/fzdwx/iter/blob/main/stream/ops_map.go#L8
+- `Filter` https://github.com/fzdwx/iter/blob/main/stream/ops_filter.go#L8
 
 collect:
 
-- ToArray https://github.com/fzdwx/iter/blob/main/array/term_collect_to_arr.go#L6
-- GroupBy https://github.com/fzdwx/iter/blob/main/array/term_groupby.go#L9
-- ToMap  https://github.com/fzdwx/iter/blob/main/array/term_tomap.go#L8
-- Reduce https://github.com/fzdwx/iter/blob/main/array/term_reduce.go#11
+- ToArray https://github.com/fzdwx/iter/blob/main/stream/term_collect_to_arr.go#L6
+- GroupBy https://github.com/fzdwx/iter/blob/main/stream/term_groupby.go#L9
+- ToMap  https://github.com/fzdwx/iter/blob/main/stream/term_tomap.go#L8
+- Reduce https://github.com/fzdwx/iter/blob/main/stream/term_reduce.go#11
