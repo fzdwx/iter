@@ -20,15 +20,11 @@ type mapParallelStream[T, U any] struct {
 	iter   types.ParallelIterator[T]
 	mapper fx.Func[T, U]
 
-	source    chan U
-	predicate func(U) bool
+	source chan U
 }
 
-func (m *mapParallelStream[T, U]) OnNext(predicate func(U) bool) {
-	m.iter.OnNext(func(t T) bool {
-		return true
-	})
-	m.predicate = predicate
+func (m *mapParallelStream[T, U]) Generate() {
+	m.iter.Generate()
 }
 
 func (m *mapParallelStream[T, U]) Source() chan U {
@@ -36,10 +32,7 @@ func (m *mapParallelStream[T, U]) Source() chan U {
 	go func() {
 		defer close(m.source)
 		for t := range m.iter.Source() {
-			u := m.mapper(t)
-			if m.predicate(u) {
-				m.source <- u
-			}
+			m.source <- m.mapper(t)
 		}
 	}()
 	return m.source

@@ -3,9 +3,7 @@ package stream
 import "github.com/fzdwx/iter/types"
 
 func ParallelCollectToArray[T any](iter types.ParallelIterator[T]) []T {
-	iter.OnNext(func(t T) bool {
-		return true
-	})
+	iter.Generate()
 
 	var arr []T
 	for item := range iter.Source() {

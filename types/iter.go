@@ -5,7 +5,7 @@ type Iterator[T any] interface {
 }
 
 type ParallelIterator[T any] interface {
-	OnNext(predicate func(T) bool)
+	Generate()
 	Source() chan T
 }
 

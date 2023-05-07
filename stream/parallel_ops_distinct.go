@@ -12,8 +12,8 @@ type distinctParallelStream[T any, K comparable] struct {
 	source   chan T
 }
 
-func (m *distinctParallelStream[T, K]) OnNext(predicate func(T) bool) {
-	m.iter.OnNext(predicate)
+func (m *distinctParallelStream[T, K]) Generate() {
+	m.iter.Generate()
 }
 
 func (m *distinctParallelStream[T, K]) Source() chan T {

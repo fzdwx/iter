@@ -11,15 +11,13 @@ type ParallelStream[T any] struct {
 	source  chan T
 }
 
-func (p *ParallelStream[T]) OnNext(predicate func(T) bool) {
+func (p *ParallelStream[T]) Generate() {
 	p.source = make(chan T, len(p.arr))
 
 	go func() {
 		defer close(p.source)
 		for _, t := range p.arr {
-			if predicate(t) {
-				p.source <- t
-			}
+			p.source <- t
 		}
 	}()
 }
