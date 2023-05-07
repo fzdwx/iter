@@ -2,7 +2,11 @@ package types
 
 type Iterator[T any] interface {
 	Next() (T, bool)
-	HasNext() bool
+}
+
+type ParallelIterator[T any] interface {
+	OnNext(predicate func(T) bool)
+	Source() chan T
 }
 
 type Number interface {
