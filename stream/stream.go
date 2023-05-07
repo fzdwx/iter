@@ -32,6 +32,22 @@ func (a *Stream[T]) HasNext() bool {
 	return a.idx < len(a.arr)
 }
 
+// Concat concatenates the given arrays to the end of this array.
+// if called after Next(), it will return itself.
+func (a *Stream[T]) Concat(others ...[]T) *Stream[T] {
+	if a.idx != -1 {
+		return a
+	}
+	if others == nil || len(others) == 0 {
+		return a
+	}
+
+	for _, v := range others {
+		a.arr = append(a.arr, v...)
+	}
+	return a
+}
+
 func (a *Stream[T]) ToArray() []T {
 	return a.arr
 }
