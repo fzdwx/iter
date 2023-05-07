@@ -52,7 +52,7 @@ func main() {
 
 ```
 
-### Array
+### Stream
 
 ops:
 
@@ -65,3 +65,4 @@ collect:
 - ToArray https://github.com/fzdwx/iter/blob/main/array/term_collect_to_arr.go#L6
 - GroupBy https://github.com/fzdwx/iter/blob/main/array/term_groupby.go#L9
 - ToMap  https://github.com/fzdwx/iter/blob/main/array/term_tomap.go#L8
+- Reduce https://github.com/fzdwx/iter/blob/main/array/term_reduce.go#11

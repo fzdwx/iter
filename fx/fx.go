@@ -1,7 +1,5 @@
 package fx
 
-import "fmt"
-
 type Predicate[T any] func(T) bool
 
 type Func[T, U any] func(T) U
@@ -78,8 +76,4 @@ func IdentityByte(t byte) byte {
 
 func IdentityRune(t rune) rune {
 	return t
-}
-
-func Println[T any](t T) {
-	fmt.Println(t)
 }

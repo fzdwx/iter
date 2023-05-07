@@ -22,10 +22,14 @@ func Iter[T any](arr []T) types.Iterator[T] {
 
 func (a *Stream[T]) Next() (T, bool) {
 	a.idx++
-	if a.idx >= len(a.arr) {
-		return types.Empty[T](), false
+	if a.HasNext() {
+		return a.arr[a.idx], true
 	}
-	return a.arr[a.idx], true
+	return types.Empty[T](), false
+}
+
+func (a *Stream[T]) HasNext() bool {
+	return a.idx < len(a.arr)
 }
 
 func (a *Stream[T]) ToArray() []T {
