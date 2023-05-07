@@ -13,10 +13,6 @@ func (a *commonStreamOps[T]) Iter() types.Iterator[T] {
 	return a.iter
 }
 
-func (a *commonStreamOps[T]) HasNext() bool {
-	return a.iter.HasNext()
-}
-
 func (a *commonStreamOps[T]) Filter(filter fx.Predicate[T]) *filterStream[T] {
 	return Filter[T](a.iter, filter)
 }

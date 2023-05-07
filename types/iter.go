@@ -2,7 +2,6 @@ package types
 
 type Iterator[T any] interface {
 	Next() (T, bool)
-	HasNext() bool
 }
 
 type Number interface {
