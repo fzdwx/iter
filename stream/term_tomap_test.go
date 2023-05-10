@@ -9,11 +9,11 @@ import (
 func TestToMap(t *testing.T) {
 	ints := []int{1, 1, 2, 2, 3, 6, 7, 8, 9, 10}
 
-	m1 := ToMap[int, string](Of(ints), func(i int) string {
+	m1 := ToMap2[int, string](Of(ints), func(i int) string {
 		return fmt.Sprintf("%d", i)
 	})
 
-	m2 := ToMapWithValue[int, string, string](Of(ints), func(i int) string {
+	m2 := ToMap[int, string, string](Of(ints), func(i int) string {
 		return fmt.Sprintf("%d", i)
 	}, func(i int) string {
 		return fmt.Sprintf("%d", i*2)

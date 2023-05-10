@@ -36,14 +36,14 @@ func main() {
 
 	a.ForEach(fx.Println[int])
 
-	m1 := stream.ToMap[int, string](iter.Stream(ints), func(i int) string {
-		return fmt.Sprintf("%d", i)
-	})
-
-	m2 := stream.ToMapWithValue[int, string, string](iter.Stream(ints), func(i int) string {
+	m1 := stream.ToMap[int, string, string](iter.Stream(ints), func(i int) string {
 		return fmt.Sprintf("%d", i)
 	}, func(i int) string {
 		return fmt.Sprintf("%d", i*2)
+	})
+
+	m2 := stream.ToMap2[int, string](iter.Stream(ints), func(i int) string {
+		return fmt.Sprintf("%d", i)
 	})
 
 	fmt.Println(m1)

@@ -35,7 +35,7 @@ func (a *Stream[T]) HasNext() bool {
 // Concat concatenates the given arrays to the end of this array.
 // if called after Next(), it will return itself.
 func (a *Stream[T]) Concat(others ...[]T) *Stream[T] {
-	if a.idx != -1 {
+	if a.callNext() {
 		return a
 	}
 	if others == nil || len(others) == 0 {
@@ -46,6 +46,10 @@ func (a *Stream[T]) Concat(others ...[]T) *Stream[T] {
 		a.arr = append(a.arr, v...)
 	}
 	return a
+}
+
+func (a *Stream[T]) callNext() bool {
+	return a.idx != -1
 }
 
 func (a *Stream[T]) ToArray() []T {

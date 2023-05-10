@@ -5,22 +5,7 @@ import (
 	"github.com/fzdwx/iter/types"
 )
 
-func ToMap[T any, K comparable](
-	iterator types.Iterator[T],
-	keyMapper fx.Func[T, K],
-) map[K]T {
-	m := make(map[K]T)
-	for {
-		v, ok := iterator.Next()
-		if !ok {
-			break
-		}
-		m[keyMapper(v)] = v
-	}
-	return m
-}
-
-func ToMapWithValue[T any, K comparable, V any](
+func ToMap[T any, K comparable, V any](
 	iterator types.Iterator[T],
 	keyMapper fx.Func[T, K],
 	valueMapper fx.Func[T, V],
@@ -34,4 +19,11 @@ func ToMapWithValue[T any, K comparable, V any](
 		m[keyMapper(v)] = valueMapper(v)
 	}
 	return m
+}
+
+func ToMap2[T any, K comparable](
+	iterator types.Iterator[T],
+	keyMapper fx.Func[T, K],
+) map[K]T {
+	return ToMap(iterator, keyMapper, fx.Identity[T])
 }
