@@ -10,15 +10,9 @@ func ToMap[T any, K comparable, V any](
 	keyMapper fx.Func[T, K],
 	valueMapper fx.Func[T, V],
 ) map[K]V {
-	m := make(map[K]V)
-	for {
-		v, ok := iterator.Next()
-		if !ok {
-			break
-		}
-		m[keyMapper(v)] = valueMapper(v)
-	}
-	return m
+	return ToMap3(iterator, func(t T) (K, V) {
+		return keyMapper(t), valueMapper(t)
+	})
 }
 
 func ToMap2[T any, K comparable](
@@ -26,4 +20,20 @@ func ToMap2[T any, K comparable](
 	keyMapper fx.Func[T, K],
 ) map[K]T {
 	return ToMap(iterator, keyMapper, fx.Identity[T])
+}
+
+func ToMap3[T any, K comparable, V any](
+	iterator types.Iterator[T],
+	mapper func(T) (K, V),
+) map[K]V {
+	m := make(map[K]V)
+	for {
+		val, ok := iterator.Next()
+		if !ok {
+			break
+		}
+		k, v := mapper(val)
+		m[k] = v
+	}
+	return m
 }
