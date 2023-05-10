@@ -48,6 +48,19 @@ func (a *Stream[T]) Concat(others ...[]T) *Stream[T] {
 	return a
 }
 
+func (a *Stream[T]) UnOrderRemove(idx int64) *Stream[T] {
+	if a.callNext() {
+		return a
+	}
+	if idx < 0 || idx >= int64(len(a.arr)) {
+		return a
+	}
+
+	a.arr[idx] = a.arr[len(a.arr)-1]
+	a.arr = a.arr[:len(a.arr)-1]
+	return a
+}
+
 func (a *Stream[T]) callNext() bool {
 	return a.idx != -1
 }

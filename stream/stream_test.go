@@ -115,3 +115,13 @@ func TestGroupBy2(t *testing.T) {
 	assert.Equal(t, g["a"], []string{"a", "a"})
 	assert.Equal(t, g["b"], []string{"b"})
 }
+
+func TestDelete(t *testing.T) {
+	ints := []int{1, 2, 3, 44, 5}
+	arr := Of(ints)
+	afterRemove := arr.UnOrderRemove(2).ToArray()
+
+	assert.Equal(t, []int{1, 2, 5, 44, 5}, ints)
+	assert.Equal(t, []int{1, 2, 5, 44}, arr.ToArray())
+	assert.Equal(t, []int{1, 2, 5, 44}, afterRemove)
+}
