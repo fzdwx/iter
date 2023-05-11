@@ -31,10 +31,8 @@ func (d *Impl[T]) Drop(n int) *Impl[T] {
 	return d
 }
 
-func (d *Impl[T]) OnEach(accept fx.Consumer[T]) *Impl[T] {
-	s := OnEach(d.seq, accept)
-	d.seq = s
-	return d
+func (d *Impl[T]) OnEach(accept fx.Consumer[T]) {
+	d.seq.Consume(accept)
 }
 
 func (d *Impl[T]) Consume(accept fx.Consumer[T]) {

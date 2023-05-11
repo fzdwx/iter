@@ -15,22 +15,27 @@ func main() {
 		println(i)
 	})
 
-	fib := seq.Generator[int64](func(accept fx.Consumer[int64]) {
-		var (
-			i int64 = 1
-			j int64 = 2
-		)
-		accept(i)
-		accept(j)
-
-		for {
-			i, j = j, i+j
+	f := func() *seq.Impl[int64] {
+		return seq.Generator[int64](func(accept fx.Consumer[int64]) {
+			var (
+				i int64 = 1
+				j int64 = 2
+			)
+			accept(i)
 			accept(j)
-		}
-	})
 
-	join := fib.Take(10).Join(",", func(i int64) string {
+			for {
+				i, j = j, i+j
+				accept(j)
+			}
+		})
+	}
+
+	join := f().Take(10).Join(",", func(i int64) string {
 		return fmt.Sprintf("%d", i)
 	})
+
+	f().Take(10).OnEach(fx.Println[int64])
+
 	fmt.Println(join)
 }
