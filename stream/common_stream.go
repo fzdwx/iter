@@ -39,6 +39,10 @@ func (a *commonStreamOps[T]) ToArray() []T {
 	return CollectToArray[T](a.iter)
 }
 
+func (a *commonStreamOps[T]) ToMap(keyMapper fx.Func[T, string]) map[string]T {
+	return ToMap2[T, string](a.iter, keyMapper)
+}
+
 func newCommonArrayOps[T any](iterator types.Iterator[T]) commonStreamOps[T] {
 	return commonStreamOps[T]{iter: iterator}
 }
