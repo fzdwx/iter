@@ -8,19 +8,12 @@ A experimental iterator library for Golang.
 go get github.com/fzdwx/iter
 ```
 
-## Usage
+### Stream
 
 playground: https://go.dev/play/p/8YyNuaK95UH
 
 ```go
 package main
-
-import (
-	"fmt"
-	"github.com/fzdwx/iter"
-	"github.com/fzdwx/iter/fx"
-	"github.com/fzdwx/iter/stream"
-)
 
 func main() {
 	ints := []int{1, 1, 2, 2, 3, 6, 7, 8, 9, 10}
@@ -52,8 +45,6 @@ func main() {
 
 ```
 
-### Stream
-
 ops:
 
 - `Distinct` https://github.com/fzdwx/iter/blob/main/stream/ops_distinct.go#L8
@@ -69,3 +60,40 @@ collect:
 - GroupBy https://github.com/fzdwx/iter/blob/main/stream/term_groupby.go#L9
 - ToMap  https://github.com/fzdwx/iter/blob/main/stream/term_tomap.go#L8
 - Reduce https://github.com/fzdwx/iter/blob/main/stream/term_reduce.go#11
+
+### Seq
+
+
+```go
+package main
+
+func main() {
+	seq.Generator[int](func(accept fx.Consumer[int]) {
+		accept(1)
+		accept(2)
+		accept(3)
+	}).Consume(func(i int) {
+		println(i) // 1, 2, 3
+	})
+
+	fib := seq.Generator[int64](func(accept fx.Consumer[int64]) {
+		var (
+			i int64 = 1
+			j int64 = 2
+		)
+		accept(i)
+		accept(j)
+
+		for {
+			i, j = j, i+j
+			accept(j)
+		}
+	})
+
+	join := fib.Take(10).Join(",", func(i int64) string {
+		return fmt.Sprintf("%d", i)
+	})
+	fmt.Println(join) // 1,2,3,5,8,13,21,34,55,89
+}
+
+```
