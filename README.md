@@ -60,6 +60,7 @@ ops:
 - `Map` https://github.com/fzdwx/iter/blob/main/stream/ops_map.go#L8
 - `Filter` https://github.com/fzdwx/iter/blob/main/stream/ops_filter.go#L8
 - `Skip`
+- `Limit` https://github.com/fzdwx/iter/blob/main/stream/ops_limit.go#L5
 
 collect:
 

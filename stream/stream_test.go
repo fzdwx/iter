@@ -138,3 +138,19 @@ func TestSkip(t *testing.T) {
 	s = Of(ints).Skip(10).ToArray()
 	assert.Equal(t, len(s), 0)
 }
+
+func TestLimit(t *testing.T) {
+	ints := []int{1, 2, 3, 44, 5}
+	s := Of(ints).Limit(1).Limit(1).ToArray()
+
+	assert.Equal(t, []int{1}, s)
+
+	s = Of(ints).Limit(1).Limit(1).Limit(1).ToArray()
+	assert.Equal(t, []int{1}, s)
+
+	s = Of(ints).Limit(10).ToArray()
+	assert.Equal(t, len(s), 5)
+
+	s = Of(ints).Skip(2).Limit(1).ToArray()
+	assert.Equal(t, []int{3}, s)
+}

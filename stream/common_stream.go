@@ -14,6 +14,10 @@ func (a *commonStreamOps[T]) Skip(n int64) *commonStreamOps[T] {
 	return a
 }
 
+func (a *commonStreamOps[T]) Limit(limit int64) *limitStream[T] {
+	return Limit[T](a.iter, limit)
+}
+
 func (a *commonStreamOps[T]) skip(n int64) Iterator[T] {
 	return a.iter.skip(n)
 }
