@@ -2,14 +2,23 @@ package stream
 
 import (
 	"github.com/fzdwx/iter/fx"
-	"github.com/fzdwx/iter/types"
 )
 
 type commonStreamOps[T any] struct {
-	iter types.Iterator[T]
+	iter Iterator[T]
 }
 
-func (a *commonStreamOps[T]) Iter() types.Iterator[T] {
+func (a *commonStreamOps[T]) Skip(n int64) *commonStreamOps[T] {
+	iter := a.iter.skip(n)
+	a.iter = iter
+	return a
+}
+
+func (a *commonStreamOps[T]) skip(n int64) Iterator[T] {
+	return a.iter.skip(n)
+}
+
+func (a *commonStreamOps[T]) Iter() Iterator[T] {
 	return a.iter
 }
 
@@ -43,6 +52,6 @@ func (a *commonStreamOps[T]) ToMap(keyMapper fx.Func[T, string]) map[string]T {
 	return ToMap2[T, string](a.iter, keyMapper)
 }
 
-func newCommonArrayOps[T any](iterator types.Iterator[T]) commonStreamOps[T] {
+func newCommonArrayOps[T any](iterator Iterator[T]) commonStreamOps[T] {
 	return commonStreamOps[T]{iter: iterator}
 }

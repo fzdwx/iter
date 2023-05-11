@@ -2,11 +2,10 @@ package stream
 
 import (
 	"github.com/fzdwx/iter/fx"
-	"github.com/fzdwx/iter/types"
 )
 
 func Distinct[T any, K comparable](
-	iter types.Iterator[T],
+	iter Iterator[T],
 	keyBy fx.Func[T, K],
 ) *distinctStream[T, K] {
 	d := &distinctStream[T, K]{
@@ -19,7 +18,7 @@ func Distinct[T any, K comparable](
 }
 
 type distinctStream[T any, K comparable] struct {
-	iter     types.Iterator[T]
+	iter     Iterator[T]
 	m        map[K]bool
 	distinct fx.Func[T, K]
 	commonStreamOps[T]

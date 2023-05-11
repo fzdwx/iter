@@ -125,3 +125,16 @@ func TestDelete(t *testing.T) {
 	assert.Equal(t, []int{1, 2, 5, 44}, arr.ToArray())
 	assert.Equal(t, []int{1, 2, 5, 44}, afterRemove)
 }
+
+func TestSkip(t *testing.T) {
+	ints := []int{1, 2, 3, 44, 5}
+	s := Of(ints).Skip(1).Skip(1).ToArray()
+
+	assert.Equal(t, []int{3, 44, 5}, s)
+
+	s = Of(ints).Skip(1).Skip(1).Skip(1).ToArray()
+	assert.Equal(t, []int{44, 5}, s)
+
+	s = Of(ints).Skip(10).ToArray()
+	assert.Equal(t, len(s), 0)
+}

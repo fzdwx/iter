@@ -5,7 +5,7 @@ import (
 	"github.com/fzdwx/iter/types"
 )
 
-func Filter[T any](iter types.Iterator[T], filter fx.Predicate[T]) *filterStream[T] {
+func Filter[T any](iter Iterator[T], filter fx.Predicate[T]) *filterStream[T] {
 	f := &filterStream[T]{
 		iter:   iter,
 		filter: filter,
@@ -15,7 +15,7 @@ func Filter[T any](iter types.Iterator[T], filter fx.Predicate[T]) *filterStream
 }
 
 type filterStream[T any] struct {
-	iter   types.Iterator[T]
+	iter   Iterator[T]
 	filter fx.Predicate[T]
 	commonStreamOps[T]
 }

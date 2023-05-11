@@ -2,11 +2,10 @@ package stream
 
 import (
 	"github.com/fzdwx/iter/fx"
-	"github.com/fzdwx/iter/types"
 )
 
 func ToMap[T any, K comparable, V any](
-	iterator types.Iterator[T],
+	iterator Iterator[T],
 	keyMapper fx.Func[T, K],
 	valueMapper fx.Func[T, V],
 ) map[K]V {
@@ -16,14 +15,14 @@ func ToMap[T any, K comparable, V any](
 }
 
 func ToMap2[T any, K comparable](
-	iterator types.Iterator[T],
+	iterator Iterator[T],
 	keyMapper fx.Func[T, K],
 ) map[K]T {
 	return ToMap(iterator, keyMapper, fx.Identity[T])
 }
 
 func ToMap3[T any, K comparable, V any](
-	iterator types.Iterator[T],
+	iterator Iterator[T],
 	mapper func(T) (K, V),
 ) map[K]V {
 	m := make(map[K]V)

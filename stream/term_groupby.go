@@ -2,16 +2,15 @@ package stream
 
 import (
 	"github.com/fzdwx/iter/fx"
-	"github.com/fzdwx/iter/types"
 )
 
 // GroupBy groups the elements of the iterator by the given key.
-func GroupBy[T any, K comparable](iter types.Iterator[T], groupBy fx.Func[T, K]) map[K][]T {
+func GroupBy[T any, K comparable](iter Iterator[T], groupBy fx.Func[T, K]) map[K][]T {
 	return (&groupArray[T, K]{iter: iter, groupBy: groupBy}).Collect()
 }
 
 type groupArray[T any, K comparable] struct {
-	iter    types.Iterator[T]
+	iter    Iterator[T]
 	groupBy fx.Func[T, K]
 }
 

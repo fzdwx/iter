@@ -5,7 +5,7 @@ import (
 	"github.com/fzdwx/iter/types"
 )
 
-func Map[T, U any](iter types.Iterator[T], mapper fx.Func[T, U]) *mapStream[T, U] {
+func Map[T, U any](iter Iterator[T], mapper fx.Func[T, U]) *mapStream[T, U] {
 	m := &mapStream[T, U]{
 		iter:   iter,
 		mapper: mapper,
@@ -15,7 +15,7 @@ func Map[T, U any](iter types.Iterator[T], mapper fx.Func[T, U]) *mapStream[T, U
 }
 
 type mapStream[T, U any] struct {
-	iter   types.Iterator[T]
+	iter   Iterator[T]
 	mapper fx.Func[T, U]
 	commonStreamOps[U]
 }
