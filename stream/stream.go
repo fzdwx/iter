@@ -16,7 +16,7 @@ func Of[T any](arr []T) *Stream[T] {
 	return a
 }
 
-func Iter[T any](arr []T) types.Iterator[T] {
+func Iter[T any](arr []T) Iterator[T] {
 	return Of[T](arr)
 }
 
@@ -26,6 +26,11 @@ func (a *Stream[T]) Next() (T, bool) {
 		return a.arr[a.idx], true
 	}
 	return types.Empty[T](), false
+}
+
+func (a *Stream[T]) skip(n int64) Iterator[T] {
+	a.idx += int(n)
+	return a.Iter()
 }
 
 func (a *Stream[T]) HasNext() bool {
