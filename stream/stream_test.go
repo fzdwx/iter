@@ -154,3 +154,12 @@ func TestLimit(t *testing.T) {
 	s = Of(ints).Skip(2).Limit(1).ToArray()
 	assert.Equal(t, []int{3}, s)
 }
+
+func TestFlatMap(t *testing.T) {
+	ints := []int{1, 2, 3}
+	array := FlatMap[int, int](Of(ints), func(i int) Iterator[int] {
+		return Of([]int{i, i + 1})
+	}).ToArray()
+
+	assert.Equal(t, []int{1, 2, 2, 3, 3, 4}, array)
+}
