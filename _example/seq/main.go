@@ -38,4 +38,7 @@ func main() {
 	f().Take(10).OnEach(fx.Println[int64])
 
 	fmt.Println(join)
+
+	collect := f().Take(10).Collect()
+	fmt.Println(collect)
 }

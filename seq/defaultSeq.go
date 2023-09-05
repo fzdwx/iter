@@ -39,13 +39,21 @@ func (d *Impl[T]) Consume(accept fx.Consumer[T]) {
 	d.seq.Consume(accept)
 }
 
-func (d *Impl[T]) Join(sep string, p fx.Func[T, string]) string {
+func (d *Impl[T]) Join(sep string, mapper fx.Func[T, string]) string {
 	var sb strings.Builder
 	d.seq.Consume(func(t T) {
-		sb.WriteString(p(t))
+		sb.WriteString(mapper(t))
 		sb.WriteString(sep)
 	})
 
 	res := sb.String()
 	return strings.TrimSuffix(res, sep)
+}
+
+func (d *Impl[T]) Collect() []T {
+	result := make([]T, 0)
+	d.seq.Consume(func(t T) {
+		result = append(result, t)
+	})
+	return result
 }
