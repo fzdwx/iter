@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/fzdwx/iter/fx"
 	"github.com/fzdwx/iter/seq"
+	"github.com/fzdwx/iter/stream"
 )
 
 func main() {
@@ -35,9 +36,19 @@ func main() {
 		return fmt.Sprintf("%d", i)
 	})
 
-	f().Take(10).OnEach(fx.Println[int64])
+	seq.Map[int64, string](f().Take(10), func(i int64) string {
+		return fmt.Sprintf("%d", i)
+	}).Consume(func(s string) {
+		fmt.Println(s)
+	})
 
 	fmt.Println(join)
+
+	iter := stream.Of([]string{"a", "b", "c"}).Iter()
+	seq.Zip(seq.Slice([]int{1, 2, 3}).Seq(), iter, func(a int, b string) string {
+		return fmt.Sprintf("%d%s", a, b)
+	}).Consume(fx.Println[string])
+	// 输出：[1a 2b 3c]
 
 	collect := f().Take(10).Collect()
 	fmt.Println(collect)

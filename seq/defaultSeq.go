@@ -13,6 +13,10 @@ type Impl[T any] struct {
 	seq Seq[T]
 }
 
+func (d *Impl[T]) Seq() Seq[T] {
+	return d
+}
+
 func (d *Impl[T]) Filter(filter fx.Predicate[T]) *Impl[T] {
 	s := Filter(d.seq, filter)
 	d.seq = s
