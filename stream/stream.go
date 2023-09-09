@@ -16,6 +16,10 @@ func Of[T any](arr []T) *Stream[T] {
 	return a
 }
 
+func Empty[T any]() *Stream[T] {
+	return Of[T]([]T{})
+}
+
 func Iter[T any](arr []T) Iterator[T] {
 	return Of[T](arr)
 }
