@@ -46,7 +46,7 @@ func main() {
 
 ### Stream
 
-playground: https://go.dev/play/p/8YyNuaK95UH
+playground: https://go.dev/play/p/DQrltHiHx6j
 
 ```go
 package main
