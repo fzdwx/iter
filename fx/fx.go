@@ -1,5 +1,9 @@
 package fx
 
+import (
+	"fmt"
+)
+
 type Predicate[T any] func(T) bool
 
 type Func[T, U any] func(T) U
@@ -76,4 +80,56 @@ func IdentityByte(t byte) byte {
 
 func IdentityRune(t rune) rune {
 	return t
+}
+
+func IntToStr(i int) string {
+	return fmt.Sprintf("%d", i)
+}
+
+func Int8ToStr(i int8) string {
+	return fmt.Sprintf("%d", i)
+}
+
+func Int16ToStr(i int16) string {
+	return fmt.Sprintf("%d", i)
+}
+
+func Int32ToStr(i int32) string {
+	return fmt.Sprintf("%d", i)
+}
+
+func Int64ToStr(i int64) string {
+	return fmt.Sprintf("%d", i)
+}
+
+func UintToStr(i uint) string {
+	return fmt.Sprintf("%d", i)
+}
+
+func Uint8ToStr(i uint8) string {
+	return fmt.Sprintf("%d", i)
+}
+
+func Uint16ToStr(i uint16) string {
+	return fmt.Sprintf("%d", i)
+}
+
+func Uint32ToStr(i uint32) string {
+	return fmt.Sprintf("%d", i)
+}
+
+func Uint64ToStr(i uint64) string {
+	return fmt.Sprintf("%d", i)
+}
+
+func Float32ToStr(i float32) string {
+	return fmt.Sprintf("%f", i)
+}
+
+func Float64ToStr(i float64) string {
+	return fmt.Sprintf("%f", i)
+}
+
+func BoolToStr(i bool) string {
+	return fmt.Sprintf("%t", i)
 }

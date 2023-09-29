@@ -11,15 +11,15 @@ func main() {
 	ints := []int{1, 1, 2, 2, 3, 6, 7, 8, 9, 10}
 
 	a := iter.Stream(ints).
-		DistinctInt(fx.IdentityInt).
+		Distinct(fx.IntToStr).
 		Filter(func(i int) bool {
 			return i > 2
 		}).
-		MapToInt(func(i int) int {
-			return i * 2
+		MapTo(func(i int) string {
+			return fx.IntToStr(i * 2)
 		})
 
-	a.ForEach(fx.Println[int])
+	a.ForEach(fx.Println[string])
 
 	m1 := stream.ToMap[int, string, string](iter.Stream(ints), func(i int) string {
 		return fmt.Sprintf("%d", i)
